@@ -3,7 +3,7 @@
     <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>My Website</title>
+        <title>GALAXY MALL</title>
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -1455,7 +1455,7 @@ margin-bottom: 50px;}
                 exposure="1"
                 shadow-intensity="1"
                 touch-action="pan-y" 
-                style="width: 600px; height: 600px; position: absolute; left: -150px; top: 50px; filter: hue-rotate(90deg) brightness(1.2) saturate(150%); pointer-events: none; transform: scaleX(-1) translateZ(0); opacity: 0; transition: opacity 0.5s ease-out, top 0.3s ease-out, left 0.3s ease-out;"
+                style="width: 600px; height: 600px; position: absolute; left: -150px; top: 50px; filter: hue-rotate(120deg) brightness(1.2) saturate(150%); pointer-events: none; transform: scaleX(-1) translateZ(0); opacity: 0; transition: opacity 0.5s ease-out, top 0.3s ease-out, left 0.3s ease-out;"
                 ar>
               </model-viewer>
             </div>
@@ -1613,7 +1613,7 @@ margin-bottom: 50px;}
   </section>
 
   <div class="wrap">
-    <img src="arrow.png" id="earaid" style="position: absolute; top: -30px; left: 500px; transform: translate(-50%, -50%); width: 40px; height: auto; animation: upDown 1s ease-in-out infinite;">
+    <img src="arrow.png" id="earaid" style="position: absolute; top: -160px; left: 500px; transform: translate(-50%, -50%); width: 40px; height: auto; animation: upDown 1s ease-in-out infinite;">
   </div>
 
   <section class="bg-gray">
@@ -1638,7 +1638,7 @@ margin-bottom: 50px;}
               </div>
             </div>
           </div>
-          <div class="model-container">
+          <div style="position: relative;">
             <model-viewer 
               id="hearingaidModel"
               src="hearingaid.glb" 
@@ -1650,7 +1650,7 @@ margin-bottom: 50px;}
               exposure="1"
               shadow-intensity="1"
               touch-action="pan-y" 
-              style="width: 600px; height: 600px; position: fixed; left: -150px; top: 50px; filter: hue-rotate(90deg) brightness(1.2) saturate(150%); z-index: 2000; pointer-events: none; transform: scaleX(-1) translateZ(0); opacity: 0; transition: opacity 0.5s ease-out, top 0.3s ease-out, left 0.3s ease-out, transform 0.3s ease-out, camera-orbit 0.5s ease-out;"
+              style="width: 500px; height: 500px; position: absolute; right: 0px; top: 70px; filter: hue-rotate(80deg) brightness(1) saturate(150%); pointer-events: none; transform: scaleX(-1) translateZ(0);"
               ar>
             </model-viewer>
           </div>
@@ -1668,7 +1668,19 @@ margin-bottom: 50px;}
         <!-- 큰 원 -->
         <div class="big-circle2"></div>
         <div class="inner-circle"></div>
-    
+        <model-viewer 
+        src="hearingaid.glb" 
+        camera-controls="false"
+        auto-rotate 
+        rotation-per-second="30deg"
+        interaction-prompt="none"
+        camera-orbit="0deg 10deg 150%"
+        exposure="1"
+        shadow-intensity="1"
+        touch-action="pan-y" 
+        style="width: 1100px; height: 1100px; position: absolute; top: -200px; left: -700px; filter: hue-rotate(80deg) brightness(0.6) saturate(150%); pointer-events: none; transform: scaleX(-1) translateZ(0);"
+        ar>
+      </model-viewer>
         <!-- 오른쪽 텍스트 블럭 -->
         <div class="text-block2">
           <h2 class="section-title sub-title freesentation-semibold text-twodotfive text-white scroll-fade">소리 너머의 유머를 읽는 기술<br><span class="text-green">농담 해석 보청기의 기능</span></h2>
@@ -1681,6 +1693,7 @@ margin-bottom: 50px;}
               <h3 class="freesentation-regular text-onedotfive text-green name">실시간 농담 해석</h3>
               <p class="freesentation-extralight text-onedottwo text-white quote">외부의 언어를 즉각 번역하여<br>난이도 있는 농담과 유행어를 실시간 해석</p>
             </div>
+
           </div>
     
           <div class="feature feature-offset" style="margin-right: 50px;">
@@ -1982,6 +1995,9 @@ margin-bottom: 50px;}
     </div>
   </footer>
 
+
+
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Q&A Accordion
@@ -2024,7 +2040,58 @@ margin-bottom: 50px;}
       recommends.forEach(item => observer.observe(item));
       scrollFades.forEach(el => observer.observe(el));
 
-      // Pills model animation
+// Kitbox and object image animations
+const kitboxObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      const objectObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('show');
+            }, 100);
+          }
+        });
+      }, { 
+        threshold: 0.5,
+        rootMargin: '0px'
+      });
+
+      document.querySelectorAll('.kitbox-img1, .kitbox-img2, .kitbox-img3').forEach(img => {
+        kitboxObserver.observe(img);
+      });
+
+      document.querySelectorAll('.object1-img, .object2-img, .object3-img').forEach(img => {
+        objectObserver.observe(img);
+      });
+
+      // 스프레드 이미지 애니메이션
+      const spreadObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+          }
+        });
+      }, { threshold: 0.2 });
+
+      document.querySelectorAll('.spread-img').forEach(img => {
+        spreadObserver.observe(img);
+      });
+
+
+
+
+
+
+      
+
+
+      // 알약 모델 애니메이션
       const pillsModel = document.getElementById('pillsModel');
       const targetCircle = document.querySelector('.big-circle2');
       const initialSection = document.querySelector('.big-title');
@@ -2069,50 +2136,8 @@ margin-bottom: 50px;}
       window.addEventListener('load', updateModelPosition);
       window.addEventListener('resize', updateModelPosition);
 
-      // Kitbox and object image animations
-      const kitboxObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-          }
-        });
-      }, { threshold: 0.1 });
-
-      const objectObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setTimeout(() => {
-              entry.target.classList.add('show');
-            }, 100);
-          }
-        });
-      }, { 
-        threshold: 0.5,
-        rootMargin: '0px'
-      });
-
-      document.querySelectorAll('.kitbox-img1, .kitbox-img2, .kitbox-img3').forEach(img => {
-        kitboxObserver.observe(img);
-      });
-
-      document.querySelectorAll('.object1-img, .object2-img, .object3-img').forEach(img => {
-        objectObserver.observe(img);
-      });
-
-      // 스프레드 이미지 애니메이션
-      const spreadObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-          }
-        });
-      }, { threshold: 0.2 });
-
-      document.querySelectorAll('.spread-img').forEach(img => {
-        spreadObserver.observe(img);
-      });
-
-      // 틀니 모델 스크롤 애니메이션
+      
+      // 틀니 모델 애니메이션
       const dentureModel = document.getElementById('dentureModel');
       const dentureInitialSection = document.querySelector('.title-wrap');
       const dentureTargetCircle = document.querySelector('.big-circle3');
@@ -2161,57 +2186,7 @@ margin-bottom: 50px;}
       window.addEventListener('resize', updateDenturePosition);
       updateDenturePosition();
 
-      // 보청기 모델 스크롤 애니메이션
-      const hearingaidModel = document.getElementById('hearingaidModel');
-      const hearingaidSection = document.querySelector('.bg-gray:nth-of-type(3)');
-      const hearingaidTitle = hearingaidSection.querySelector('.big-title');
-      const hearingaidCircle = document.querySelector('.big-circle3');
 
-      function updateHearingaidPosition() {
-        const sectionRect = hearingaidSection.getBoundingClientRect();
-        const titleRect = hearingaidTitle.getBoundingClientRect();
-        const circleRect = hearingaidCircle.getBoundingClientRect();
-
-        if (sectionRect.top <= window.innerHeight && sectionRect.bottom >= 0) {
-          if (titleRect.top <= 0) {
-            if (circleRect.top <= window.innerHeight) {
-              const progress = Math.min(1, Math.max(0, 
-                (window.innerHeight - circleRect.top) / window.innerHeight
-              ));
-              
-              const initialRight = 200;
-              const targetRight = 1200;
-              const currentRight = initialRight + (targetRight - initialRight) * progress;
-              
-              const initialTop = 350;
-              const targetTop = circleRect.top + 300;
-              const currentTop = initialTop + (targetTop - initialTop) * progress;
-              
-              hearingaidModel.style.position = 'fixed';
-              hearingaidModel.style.right = `${currentRight}px`;
-              hearingaidModel.style.top = `${currentTop}px`;
-              hearingaidModel.style.transform = `scaleX(-1) scale(${1 + progress})`;
-              hearingaidModel.setAttribute('camera-orbit', `0deg ${75 - progress * 75}deg 150%`);
-            } else {
-              hearingaidModel.style.position = 'fixed';
-              hearingaidModel.style.right = '200px';
-              hearingaidModel.style.top = '350px';
-              hearingaidModel.style.transform = 'scaleX(-1)';
-              hearingaidModel.setAttribute('camera-orbit', '0deg 75deg 150%');
-            }
-          } else {
-            hearingaidModel.style.position = 'absolute';
-            hearingaidModel.style.right = '200px';
-            hearingaidModel.style.top = '350px';
-            hearingaidModel.style.transform = 'scaleX(-1)';
-            hearingaidModel.setAttribute('camera-orbit', '0deg 75deg 150%');
-          }
-        }
-      }
-
-      window.addEventListener('scroll', updateHearingaidPosition);
-      window.addEventListener('resize', updateHearingaidPosition);
-      updateHearingaidPosition();
     });
   </script>
 
